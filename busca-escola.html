@@ -23,8 +23,6 @@
 
         <script>
             function trataConsultarBtn() {
-                // Apresenta GIF de "loading"
-               
                 //limpaResultados();
                 
                 const escola = document.getElementById("inputEscola").value;
@@ -40,6 +38,25 @@
 
             }
 
+            
+            function aaaa(teste, id) {
+               
+                //limpaResultados();
+                console.log(id)
+                const urlEstado = `https://simcaq.c3sl.ufpr.br/api/v1/${teste}?filter=id:${id}`;
+                console.log(urlEstado)
+                fetch(urlEstado, {
+                    method : "GET",
+                })
+                .then( (resp) => resp.json() )
+                .then( (data) => {
+                    //tratar o resultado "data" no formato json
+                    return data;
+                })
+
+            }
+
+
             function apresentaResultadoEscola(data) {
                 // Remove GIF de "loading"
                
@@ -48,6 +65,10 @@
                 console.log(data)
 
                 var resultados=data.result;
+                var estado = aaaa('state', resultados[0].state_id)
+
+                console.log(estado)
+
                 elem.innerHTML += resultados[0].name + "</br>";
                 elem.innerHTML += resultados[0].state_id + "</br>";
                 elem.innerHTML += resultados[0].city_id;
