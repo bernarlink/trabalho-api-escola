@@ -38,12 +38,13 @@
 
             }
 
+
             
-            function aaaa(teste, id) {
+            function busca_estado(id) {
                
                 //limpaResultados();
                 console.log(id)
-                const urlEstado = `https://simcaq.c3sl.ufpr.br/api/v1/${teste}?filter=id:${id}`;
+                const urlEstado = `https://simcaq.c3sl.ufpr.br/api/v1/state?filter=id:${id}`;
                 console.log(urlEstado)
                 fetch(urlEstado, {
                     method : "GET",
@@ -65,8 +66,8 @@
                 console.log(data)
 
                 var resultados=data.result;
-                var estado = aaaa('state', resultados[0].state_id)
-
+                var estado = busca_estado(resultados[0].state_id)
+                
                 console.log(estado)
 
                 elem.innerHTML += resultados[0].name + "</br>";
