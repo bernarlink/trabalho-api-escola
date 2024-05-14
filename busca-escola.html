@@ -9,6 +9,19 @@
 </head>
 
 <body>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <img class="bi me-2" width="50" height="60"
+                    src="https://ifrs.edu.br/farroupilha/wp-content/uploads/sites/12/2022/05/logo-vertical-branco.png"></img>
+                <span class="fs-4">Bernardo Reolon e Téo</span>
+            </a>
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link px-2 text-body-secondary">Info IV</a></li>
+            </ul>
+        </header>
+    </div>
+    </br>
     <div class="container ">
         <h1>Consulta API Escolas</h1>
         <form>
@@ -18,12 +31,40 @@
             </div>
             <button class="btn btn-outline-success" type="button" onClick="trataConsultarBtn()">Consultar</button>
             <button class="btn btn-outline-success" type="button" onClick="trataLimparBtn()">Limpar</button>
-
-            <input type="text" id="name">
-            <input type="text" id="state">
-            <input type="text" id="city">
+            </br>
+            </br>
+            </br>
+            <form>
+                <fieldset disabled>
+                    <legend>Os resultados irão aparecer aqui:</legend>
+                    <div class="mb-3">
+                        <label for="disabledTextInput" class="form-label">Escola</label>
+                        <input type="text" id="name" class="form-control" placeholder="Nome da escola">
+                    </div>
+                    <div class="mb-3">
+                        <label for="disabledTextInput" class="form-label">Estado</label>
+                        <input type="text" id="state" class="form-control" placeholder="Nome do Estado">
+                    </div>
+                    <div class="mb-3">
+                        <label for="disabledTextInput" class="form-label">Cidade</label>
+                        <input type="text" id="city" class="form-control" placeholder="Nome da cidade">
+                    </div>
+            </form>
         </form>
         <p id="escolaResponse"></p>
+        </br>
+        </br>
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <p class="col-md-4 mb-0 text-body-secondary">2024 Instituto Federal - Campus Farroupilha</p>
+            <a
+                class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <img class="bi me-2" width="600" height="100"
+                    src="https://ifrs.edu.br/farroupilha/wp-content/uploads/sites/12/2022/05/logo-horizontal-1-branco.png"></img>
+            </a>
+            <ul class="nav col-md-4 justify-content-end">
+                <li class="nav-item"><a class="nav-link px-2 text-body-secondary">Prof. Felipe Sampaio</a></li>
+            </ul>
+        </footer>
     </div>
 
 
@@ -89,7 +130,7 @@
             busca_estado(resultados[0].state_id, resultados)
 
             elem.value = resultados[0].name;
-            
+
         }
 
         function trataLimparBtn() {
@@ -98,7 +139,9 @@
         }
 
         function limpaInputs() {
-            document.getElementById("inputEscola").value = '';
+            document.getElementById("name").value = '';
+            document.getElementById("state").value = '';
+            document.getElementById("city").value = '';
         }
 
         function limpaResultados() {
