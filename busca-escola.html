@@ -45,20 +45,28 @@
 
         function busca_estado(id, resultados) {
 
-            limpaResultados();
-            console.log(id)
             const urlEstado = `https://simcaq.c3sl.ufpr.br/api/v1/state?filter=id:${id}`;
-            console.log(urlEstado)
             fetch(urlEstado, {
                 method: "GET",
             })
                 .then((resp) => resp.json())
                 .then((data) => {
-                    console.log(data)
                     var elem = document.getElementById('escolaResponse');
-                    console.log(data[0])
                     elem.innerHTML += data.result[0].name + "</br>";
-                    elem.innerHTML += resultados[0].city_id;
+                    busca_cidade(resultados[0].city_id, resultados)
+                })
+
+        }
+
+        function busca_cidade(id, resultados) {
+            const urlCidade = `https://simcaq.c3sl.ufpr.br/api/v1/city?filter=id:${id}`;
+            fetch(urlCidade, {
+                method: "GET",
+            })
+                .then((resp) => resp.json())
+                .then((data) => {
+                    var elem = document.getElementById('escolaResponse');
+                    elem.innerHTML += data.result[0].name + "</br>";
                 })
 
         }
@@ -66,8 +74,6 @@
 
         function apresentaResultadoEscola(data) {
             var elem = document.getElementById('escolaResponse');
-            console.log(data)
-
             var resultados = data.result;
             busca_estado(resultados[0].state_id, resultados)
 
