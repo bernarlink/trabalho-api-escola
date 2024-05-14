@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8" />
@@ -9,15 +9,19 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container ">
         <h1>Consulta API Escolas</h1>
         <form>
             <div class="mb-3">
                 <label for="inputEscola" class="form-label">Insira um ID de alguma escola:</label>
                 <input type="text" class="form-control" id="inputEscola">
             </div>
-            <button class="btn btn-primary" type="button" onClick="trataConsultarBtn()">Consultar</button>
-            <button class="btn btn-primary" type="button" onClick="trataLimparBtn()">Limpar</button>
+            <button class="btn btn-outline-success" type="button" onClick="trataConsultarBtn()">Consultar</button>
+            <button class="btn btn-outline-success" type="button" onClick="trataLimparBtn()">Limpar</button>
+
+            <input type="text" id="name">
+            <input type="text" id="state">
+            <input type="text" id="city">
         </form>
         <p id="escolaResponse"></p>
     </div>
@@ -45,15 +49,20 @@
 
         function busca_estado(id, resultados) {
 
+            limpaResultados();
+            console.log(id)
             const urlEstado = `https://simcaq.c3sl.ufpr.br/api/v1/state?filter=id:${id}`;
+            console.log(urlEstado)
             fetch(urlEstado, {
                 method: "GET",
             })
                 .then((resp) => resp.json())
                 .then((data) => {
-                    var elem = document.getElementById('escolaResponse');
-                    elem.innerHTML += data.result[0].name + "</br>";
-                    busca_cidade(resultados[0].city_id, resultados)
+                    console.log(data)
+                    var elem = document.getElementById('state');
+                    console.log(data[0])
+                    elem.value = data.result[0].name;
+                    busca_cidade(resultados[0].city_id, resultados);
                 })
 
         }
@@ -65,19 +74,22 @@
             })
                 .then((resp) => resp.json())
                 .then((data) => {
-                    var elem = document.getElementById('escolaResponse');
-                    elem.innerHTML += data.result[0].name + "</br>";
+                    var elem = document.getElementById('city');
+                    elem.value = data.result[0].name;
                 })
 
         }
 
 
         function apresentaResultadoEscola(data) {
-            var elem = document.getElementById('escolaResponse');
+            var elem = document.getElementById('name');
+            console.log(data)
+
             var resultados = data.result;
             busca_estado(resultados[0].state_id, resultados)
 
-            elem.innerHTML += resultados[0].name + "</br>";
+            elem.value = resultados[0].name;
+            
         }
 
         function trataLimparBtn() {
